@@ -58,6 +58,8 @@ void StartDefaultTask(void *argument);
 
 /* USER CODE BEGIN PFP */
 
+void MX_FREERTOS_Init(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -122,6 +124,7 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
+  MX_FREERTOS_Init();
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
