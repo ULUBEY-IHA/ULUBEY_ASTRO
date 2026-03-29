@@ -7,7 +7,7 @@ Bu repo, görev karar mantığının ve donanım arayüzlerinin ayrık katmanlar
 ## Proje Özet
 
 Projenin temel hedefi:
-- Uydunun hedef bölge (örnek: Bursa enlem aralığı) kontrolünü yapmak
+- Uydunun Dünyada hedef bölgeler için (örnek: Bursa enlem aralığı) kontrolleri yapmak
 - ADCS modunu dinamik olarak yönetmek (Idle / Targeting)
 - Stabilizasyon sonrası payload adımlarını tetiklemek (kamera + radyo)
 - Hata/timeout durumlarında sistemi kilitlemeden güvenli şekilde döngüye devam etmek
@@ -38,8 +38,7 @@ Ana klasörler:
 - `ULUBEY_ASTRO/Interfaces`: Donanımdan bağımsız arayüz fonksiyonları
 - `ULUBEY_ASTRO/Logic`: Görev algoritması (mission manager)
 - `ULUBEY_ASTRO/EWARM`: IAR EWARM proje dosyaları
-- `docs`: Teknik raporlar, akış diyagramları, Renode script/dokümanları
-- `scripts`: Otomasyon scriptleri (Renode çalıştırma vb.)
+- `docs`: Teknik raporlar, akış diyagramları
 
 ## Mission Algoritması
 
@@ -77,8 +76,6 @@ Diyagram açıklaması:
 
 Ek dokümanlar:
 - `docs/teknik_rapor_mission_logic.md`: Mission logic teknik raporu
-- `docs/renode_hizli_baslat.md`: Renode hızlı başlatma adımları
-- `docs/rtos_akis_gorsellestirme.md`: RTOS akış görselleştirme notları
 
 ## Notlar
 
