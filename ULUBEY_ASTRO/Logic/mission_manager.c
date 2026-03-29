@@ -10,6 +10,14 @@
 #define TARGETING_MODE  (1U)
 #define IDLE_MODE       (0U)
 
+/*
+ * Mission akisi:
+ * 1) Konum oku
+ * 2) Hedef bolgedeyse ADCS'i hedefleme moduna al
+ * 3) ADCS stabil olana kadar sinirli sure bekle
+ * 4) Stabil olursa payload adimini tetikle
+ * 5) Hedef disinda ise ADCS'i idle moda al
+ */
 void vTaskMissionManager(void *argument)
 {
   float lat = 0.0f;
@@ -21,6 +29,7 @@ void vTaskMissionManager(void *argument)
 
   for (;;)
   {
+    /* Periyodik konum guncellemesi. */
     IF_GPS_GetLocation(&lat, &lon);
 
     if ((lat >= TARGET_MIN_LAT) && (lat <= TARGET_MAX_LAT))
@@ -31,6 +40,7 @@ void vTaskMissionManager(void *argument)
       stableRetryCount = 0U;
       adcsStatus = ADCS_NOT_STABLE;
 
+      /* 50 x 200ms ~= 10s timeout ile stabilizasyon polling'i. */
       while (stableRetryCount < 50U)
       {
         adcsStatus = IF_ADCS_GetStatus();
@@ -47,11 +57,13 @@ void vTaskMissionManager(void *argument)
 
       if (adcsStatus != ADCS_STABLE)
       {
+        /* Timeout durumunda fail-safe olarak idle moda donulur. */
         printf("[ERROR]: ADCS Timeout!\r\n");
         IF_ADCS_SetMode(IDLE_MODE);
         continue;
       }
 
+      /* Stabil olduktan sonra payload islemleri tetiklenir. */
       printf("[LOGIC][MISSION] adcs-stable payload-sequence-start\r\n");
       IF_Camera_Capture();
       IF_Radio_Transmit();
@@ -62,6 +74,7 @@ void vTaskMissionManager(void *argument)
       IF_ADCS_SetMode(IDLE_MODE);
     }
 
+    /* Mission loop periodu: 1 saniye. */
     osDelay(1000U);
   }
 }
