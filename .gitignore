@@ -1,0 +1,39 @@
+# Build outputs
+Debug/
+Release/
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+*.obj
+*.o
+*.out
+*.exe
+
+# IDE Specific (IAR / EWARM)
+EWARM/Settings/
+EWARM/*.dep
+EWARM/*.dnx
+EWARM/*.ewd.bak
+EWARM/*.ewp.bak
+EWARM/Project.eww.bak
+*.ucf
+
+# IDE Specific (STM32CubeIDE)
+.settings/
+.project
+.cproject
+.mxproject
+
+# Simulation (Renode)
+*.log
+renode/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+*~
